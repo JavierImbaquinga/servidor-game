@@ -11,6 +11,8 @@ var _morgan = _interopRequireDefault(require("morgan"));
 
 var _package = _interopRequireDefault(require("../package.json"));
 
+var _cors = _interopRequireDefault(require("cors"));
+
 var _categories = _interopRequireDefault(require("./routes/categories.routes"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -19,7 +21,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 var app = (0, _express["default"])(); //variables en express
 
 app.set('pkg', _package["default"]);
-app.use((0, _morgan["default"])('dev')); //peticiones
+app.use(_express["default"].json());
+app.use((0, _morgan["default"])('dev'));
+app.use((0, _cors["default"])()); //peticiones
 
 app.get('/', function (req, res) {
   res.json({
